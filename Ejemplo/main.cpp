@@ -1,23 +1,23 @@
 #include <iostream>
 using namespace std;
 
-long long factorial(long long n);
+long long fibonacci(long long n);
 
 int main(void){
     int x=7;
-    cout<<endl<<x<<"! = f("<<x<<") = "<<factorial(x)<<endl;
+    cout<<"fibonacci("<<x<<") = "<<fibonacci(x)<<endl;
     return 0;
 }
-long long factorial(long long n){
-    long long f;
-    cout<<"f("<<n<<")"<<endl;
-    if(n>0){
-        f = n * factorial(n-1);
-        cout<<"f("<<n<<") retorna "<<f<<endl;
-        return f;
-    }
+long long fibonacci(long long n){
+    long long a=0,b=1,c=0;
+    if(n==1||n==0)
+        return n;
     else{
-        cout<<endl<<"f("<<n<<") retorna "<<1<<endl;
-        return 1;
+        for(int i=2; i<=n; i++){
+            c = a+b;
+            a=b;
+            b=c;
+        }
     }
+    return c;
 }
