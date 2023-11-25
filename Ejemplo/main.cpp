@@ -1,22 +1,189 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 
-long long fibonacci(long long n);
+class Arbol{
+private:
+    class Nodo{
+    public:
+        Nodo* izquierdo;
+        float dato;
+        Nodo* derecho;
+        Nodo(void){
+            izquierdo = NULL;
+            dato = 0;
+            derecho = NULL;
+            //cout<<"Nodo construido..."<<endl;
+        };
+        Nodo(Nodo* izq, float d, Nodo* der){
+            izquierdo = izq;
+            dato = d;
+            derecho = der;
+            //cout<<"Nodo construido..."<<endl;
+        };
+        ~Nodo(void){
+            //cout<<"Nodo destruido..."<<endl;
+        };
+    };
+    Nodo* raiz;
+    void inserta(Nodo* aqui, float d){
+        if(d <= aqui->dato && aqui->izquierdo==NULL)
+            aqui->izquierdo = new Nodo(NULL,d,NULL);
 
+        else if(d > aqui->dato && aqui->derecho==NULL)
+            aqui->derecho = new Nodo(NULL,d,NULL);
+
+        else if(d <= aqui->dato && aqui->izquierdo!=NULL)
+            inserta(aqui->izquierdo,d);
+
+        else if(d > aqui->dato && aqui->derecho!=NULL)
+            inserta(aqui->derecho,d);
+    };
+    void liberaArbol(Nodo* aqui){
+        if(aqui != NULL){
+            liberaArbol(aqui->izquierdo);
+            liberaArbol(aqui->derecho);
+            cout<<aqui->dato<<" ";
+            delete aqui;
+        }
+    };
+    void muestraPreOrdem(Nodo*aqui){
+        if(aqui != NULL){
+            cout<<aqui->dato<<" ";
+            muestraPreOrdem(aqui->izquierdo);
+            muestraPreOrdem(aqui->derecho);
+        }
+    };
+    void muestraPostOrdem(Nodo*aqui){
+        if(aqui != NULL){
+            muestraPostOrdem(aqui->izquierdo);
+            muestraPostOrdem(aqui->derecho);
+            cout<<aqui->dato<<" ";
+        }
+    };
+    void muestraInOrdem(Nodo*aqui){
+        if(aqui != NULL){
+            muestraInOrdem(aqui->izquierdo);
+            cout<<aqui->dato<<" ";
+            muestraInOrdem(aqui->derecho);
+        }
+    };
+    void muestraInOrdemR(Nodo*aqui){
+        if(aqui != NULL){
+            muestraInOrdemR(aqui->derecho);
+            cout<<aqui->dato<<" ";
+            muestraInOrdemR(aqui->izquierdo);
+        }
+    };
+    bool busca(Nodo* aqui, float d){
+        //Tarea
+    };
+    int cuentaNodos(Nodo* aqui){
+        //Tarea
+    };
+    float sumaNodos(Nodo* aqui){
+        //Tarea
+    };
+    float buscaMenor(Nodo* aqui){
+        //Tarea
+    };
+    float buscaMayor(Nodo* aqui){
+        //Tarea
+    };
+
+public:
+    Arbol(void){
+        raiz = NULL;
+    };
+    ~Arbol(void){
+        liberaArbol();
+    };
+    bool estaVacio(void){
+        return raiz == NULL;
+    };
+    void inserta(float d){
+        if(estaVacio())
+            raiz = new Nodo(NULL,d,NULL);
+        else
+            inserta(raiz,d);
+    };
+    void liberaArbol(void){
+        liberaArbol(raiz);
+        raiz = NULL;
+    };
+    void muestraPreOrdem(void){
+        muestraPreOrdem(raiz);
+    };
+    void muestraPostOrdem(void){
+        muestraPostOrdem(raiz);
+    };
+    void muestraInOrdem(void){
+        muestraInOrdem(raiz);
+    };
+    void muestraInOrdemR(void){
+        muestraInOrdemR(raiz);
+    };
+    bool busca(float d){
+        return busca(raiz,d);
+    };
+    int cuentaNodos(void){
+        return cuentaNodos(raiz);
+    };
+    float sumaNodos(void){
+        return sumaNodos(raiz);
+    };
+    float buscaMenor(void){
+        if(estaVacio())
+            return -1;
+        else
+            return buscaMenor(raiz);
+    };
+    float buscaMayor(void){
+        if(estaVacio())
+            return -1;
+        else
+            return buscaMayor(raiz);
+    };
+};
 int main(void){
-    int x=5;
-    cout<<endl<<"fibonacci("<<x<<") = "<<fibonacci(x)<<endl;
+    Arbol A;
+
+    A.inserta(50);
+    A.inserta(30);
+    A.inserta(70);
+    A.inserta(20);
+    A.inserta(40);
+    A.inserta(60);
+    A.inserta(80);
+    A.inserta(25);
+    A.inserta(35);
+    A.inserta(55);
+    A.inserta(90);
+
+    cout<<endl<<endl
+        <<"Muestra preordem:"<<endl;
+    A.muestraPreOrdem();
+    cout<<endl<<endl;
+
+    cout<<endl<<endl
+        <<"Muestra posordem:"<<endl;
+    A.muestraPostOrdem();
+    cout<<endl<<endl;
+
+    cout<<endl<<endl
+        <<"Muestra inordem:"<<endl;
+    A.muestraInOrdem();
+    cout<<endl<<endl;
+
+    cout<<endl<<endl
+        <<"Muestra inordemR:"<<endl;
+    A.muestraInOrdemR();
+    cout<<endl<<endl;
+
+    cout<<endl<<endl
+        <<"Fin del main:"
+        <<endl<<endl;
+
     return 0;
-}
-
-long long fibonacci(long long n){
-    if(n-2>=0 && n-1>=0)
-        cout<<"f("<<n<<") llama primero a "<<"f("<<n-2<<") y luego a "<<"f("<<n-1<<")"<<endl;
-    else
-        cout<<"f("<<n<<") retorna "<<n<<endl;
-
-    if(n>1)
-        return fibonacci(n-2) + fibonacci(n-1);
-    else
-        return n;
 }
