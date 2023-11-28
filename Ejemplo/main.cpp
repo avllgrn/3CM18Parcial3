@@ -91,6 +91,9 @@ private:
     float buscaMayor(Nodo* aqui){
         //Tarea
     };
+    int alturaDeArbol(Nodo* aqui){
+        //Tarea
+    };
 
 public:
     Arbol(void){
@@ -145,10 +148,23 @@ public:
         else
             return buscaMayor(raiz);
     };
+    void muestraEnAnchura(void){
+        //Tarea
+    };
+    void muestraEnProfundidad(void){
+        //Tarea
+    };
+    int alturaDeArbol(void){
+        if (estaVacio())
+            return 0;
+        else
+            return alturaDeArbol(raiz)-1;
+    };
 };
+
+
 int main(void){
     Arbol A;
-
     A.inserta(50);
     A.inserta(30);
     A.inserta(70);
@@ -176,10 +192,44 @@ int main(void){
     A.muestraInOrdem();
     cout<<endl<<endl;
 
+    for(float d=0; d<=100; d++)
+        if(A.busca(d))
+            cout<<d<<" SI esta"<<endl;
+        else
+            cout<<d<<" NO esta"<<endl;
+
     cout<<endl<<endl
-        <<"Muestra inordemR:"<<endl;
-    A.muestraInOrdemR();
+        <<"En anchura:"
+        <<endl<<endl;
+    A.muestraEnAnchura();
     cout<<endl<<endl;
+
+    cout<<endl<<endl
+        <<"En profundidad:"
+        <<endl<<endl;
+    A.muestraEnProfundidad();
+    cout<<endl<<endl;
+
+    cout<<endl<<endl
+        <<"Hay "<<A.cuentaNodos()<<" nodos."
+        <<endl<<endl;
+
+    cout<<endl<<endl
+        <<"Los nodos suman: "<<A.sumaNodos()
+        <<endl<<endl;
+
+    cout<<endl<<endl
+        <<"el menor es: "<<A.buscaMenor()
+        <<endl<<endl;
+
+    cout<<endl<<endl
+        <<"el mayor es: "<<A.buscaMayor()
+        <<endl<<endl;
+
+    cout<<endl<<endl
+        <<"Altura del arbol: "
+        <<A.alturaDeArbol()
+        <<endl<<endl;
 
     cout<<endl<<endl
         <<"Fin del main:"
