@@ -48,6 +48,26 @@ private:
             delete aqui;
         }
     };
+    bool eliminaSubarbol(Nodo*aqui,float d){
+        if(aqui->izquierdo==NULL && d<aqui->dato)
+            return false;
+        else if(aqui->derecho==NULL && d>aqui->dato)
+            return false;
+        else if(aqui->izquierdo!=NULL && d == aqui->izquierdo->dato){
+            liberaArbol(aqui->izquierdo);
+            aqui->izquierdo = NULL;
+            return true;
+        }
+        else if(aqui->derecho!=NULL && d == aqui->derecho->dato){
+            liberaArbol(aqui->derecho);
+            aqui->derecho = NULL;
+            return true;
+        }
+        else if(aqui->izquierdo!=NULL && d<aqui->dato)
+            return eliminaSubarbol(aqui->izquierdo,d);
+        else if(aqui->derecho!=NULL && d>aqui->dato)
+            return eliminaSubarbol(aqui->derecho,d);
+    };
     void muestraPreOrdem(Nodo*aqui){
         if(aqui != NULL){
             cout<<aqui->dato<<" ";
@@ -115,6 +135,16 @@ public:
         liberaArbol(raiz);
         raiz = NULL;
     };
+    bool eliminaSubarbol(float d){
+        if(estaVacio())
+            return false;
+        else if(d==raiz->dato){
+            liberaArbol();
+            return true;
+        }
+        else
+            return eliminaSubarbol(raiz,d);
+    };
     void muestraPreOrdem(void){
         muestraPreOrdem(raiz);
     };
@@ -165,6 +195,8 @@ public:
 
 int main(void){
     Arbol A;
+    float d;
+
     A.inserta(50);
     A.inserta(30);
     A.inserta(70);
@@ -192,12 +224,6 @@ int main(void){
     A.muestraInOrdem();
     cout<<endl<<endl;
 
-    for(float d=0; d<=100; d++)
-        if(A.busca(d))
-            cout<<d<<" SI esta"<<endl;
-        else
-            cout<<d<<" NO esta"<<endl;
-
     cout<<endl<<endl
         <<"En anchura:"
         <<endl<<endl;
@@ -209,6 +235,11 @@ int main(void){
         <<endl<<endl;
     A.muestraEnProfundidad();
     cout<<endl<<endl;
+
+    cout<<endl<<endl
+        <<"Altura del arbol: "
+        <<A.alturaDeArbol()
+        <<endl<<endl;
 
     cout<<endl<<endl
         <<"Hay "<<A.cuentaNodos()<<" nodos."
@@ -226,10 +257,37 @@ int main(void){
         <<"el mayor es: "<<A.buscaMayor()
         <<endl<<endl;
 
+    system("pause");
+    system("cls");
+
+    for(float d=0; d<=100; d++)
+        if(A.busca(d))
+            cout<<d<<" SI esta"<<endl;
+        else
+            cout<<d<<" NO esta"<<endl;
+    system("pause");
+    system("cls");
+
     cout<<endl<<endl
-        <<"Altura del arbol: "
-        <<A.alturaDeArbol()
-        <<endl<<endl;
+        <<"Muestra inordem:"<<endl;
+    A.muestraInOrdem();
+    cout<<endl<<endl;
+
+    cout<<endl<<endl
+        <<"Que dato (subarbol) deseas eliminar? ";
+    cin>>d;
+    if(A.eliminaSubarbol(d))
+        cout<<endl<<endl<<" FUE eliminado."<<endl;
+    else
+        cout<<endl<<endl<<" NO fue eliminado."<<endl;
+    cout<<endl<<endl;
+
+    cout<<endl<<endl
+        <<"Muestra inordem:"<<endl;
+    A.muestraInOrdem();
+    cout<<endl<<endl;
+    system("pause");
+    system("cls");
 
     cout<<endl<<endl
         <<"Fin del main:"
