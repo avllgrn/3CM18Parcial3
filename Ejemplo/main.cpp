@@ -1,36 +1,31 @@
 #include <iostream>
+#include <stdlib.h>
+#include <time.h>
 #include <fstream>
 using namespace std;
 
 int main(void){
-    ofstream FSalida("archivo.txt");
-    int a = 5;
-    float b = 56.78;
-    string c = "Una Cadena Con Espacios.";
-    string saltoDeLinea;
+    srand(time(NULL));
+    ofstream FS("datos.txt");
+    int i,entero;
 
-    FSalida << a << endl;
-    FSalida << b << endl;
-    FSalida << c << endl;
+    for(i=0;i<5;i++)
+        FS << rand()%100 << endl;
+    FS.close();
 
-    FSalida.close();
+    ifstream FE("datos.txt");
 
-
-    ifstream FEntrada("archivo.txt");
-    int otroInt;
-    float otroFloat;
-    string otroString;
-
-    FEntrada >> otroInt
-             >> otroFloat;
-    getline(FEntrada,saltoDeLinea);
-    getline(FEntrada,otroString);
-
-    cout << otroInt << endl;
-    cout << otroFloat << endl;
-    cout << otroString << endl;
-
-    FEntrada.close();
+    FE >> entero;
+	cout<<entero<<endl;
+    FE >> entero;
+	cout<<entero<<endl;
+    FE >> entero;
+	cout<<entero<<endl;
+    FE >> entero;
+	cout<<entero<<endl;
+    FE >> entero;
+	cout<<entero<<endl;
+    FE.close();
 
     return 0;
 }
