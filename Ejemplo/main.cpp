@@ -7,25 +7,19 @@ using namespace std;
 int main(void){
     srand(time(NULL));
     ofstream FS("datos.txt");
-    int i,entero;
+    int i,n,entero;
     char caracter;
 
-    for(i=0;i<5;i++)
+    cout<<"Cuantos datos? ";cin>>n;
+    for(i=0;i<n;i++)
         FS << rand()%100 << ",";
     FS.close();
 
     ifstream FE("datos.txt");
 
-    FE >> entero >> caracter;
-    cout<<entero<<endl;
-    FE >> entero >> caracter;
-    cout<<entero<<endl;
-    FE >> entero >> caracter;
-    cout<<entero<<endl;
-    FE >> entero >> caracter;
-    cout<<entero<<endl;
-    FE >> entero >> caracter;
-    cout<<entero<<endl;
+    while(FE >> entero >> caracter){
+        cout<<entero<<endl;
+    }
     FE.close();
 
     return 0;
