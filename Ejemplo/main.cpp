@@ -4,7 +4,7 @@ using namespace std;
 
 int main(void){
     ofstream FSalida("archivo.txt");
-    int a = 5;
+    float a = 56.78;
 
     FSalida << a << endl;
 
@@ -12,11 +12,11 @@ int main(void){
 
 
     ifstream FEntrada("archivo.txt");
-    int otroInt;
+    float otroFloat;
 
-    FEntrada >> otroInt;
+    FEntrada >> otroFloat;
 
-    cout << otroInt << endl;
+    cout << otroFloat << endl;
 
     FEntrada.close();
 
