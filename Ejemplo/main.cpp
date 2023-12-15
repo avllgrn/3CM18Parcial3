@@ -5,7 +5,8 @@ using namespace std;
 int main(void){
     string Cadena;
     int entero;
-    cout<<"Ingresa varios enteros separados por un espacio en blanco ";
+    char caracter;
+    cout<<"Ingresa varios enteros cada uno seguido por una coma ";
     getline(cin,Cadena);
 
     cout<<"Ingresaste: "<<Cadena<<endl<<endl;
@@ -13,7 +14,7 @@ int main(void){
     stringstream ss(Cadena);
 
     cout<<"Cada numero por separado:"<<endl;
-    while(ss>>entero){
+    while(ss>>entero>>caracter){
         cout<<entero<<endl;
     }
 
