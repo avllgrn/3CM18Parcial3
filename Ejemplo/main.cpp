@@ -4,7 +4,7 @@ using namespace std;
 
 int main(void){
     ofstream FSalida("archivo.txt");
-    char a = '@';
+    string a = "UnaCadenaCualquiera.";
 
     FSalida << a << endl;
 
@@ -12,11 +12,11 @@ int main(void){
 
 
     ifstream FEntrada("archivo.txt");
-    char otroChar;
+    string otroString;
 
-    FEntrada >> otroChar;
+    FEntrada >> otroString;
 
-    cout << otroChar << endl;
+    cout << otroString << endl;
 
     FEntrada.close();
 
