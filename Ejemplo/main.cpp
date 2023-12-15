@@ -1,26 +1,21 @@
 #include <iostream>
-#include <stdlib.h>
-#include <time.h>
-#include <fstream>
+#include <sstream>
 using namespace std;
 
 int main(void){
-    srand(time(NULL));
-    ofstream FS("datos.txt");
-    int i,n,entero;
-    char caracter;
+    string Cadena;
+    int entero;
+    cout<<"Ingresa varios enteros separados por un espacio en blanco ";
+    getline(cin,Cadena);
 
-    cout<<"Cuantos datos? ";cin>>n;
-    for(i=0;i<n;i++)
-        FS << rand()%100 << ",";
-    FS.close();
+    cout<<"Ingresaste: "<<Cadena<<endl<<endl;
 
-    ifstream FE("datos.txt");
+    stringstream ss(Cadena);
 
-    while(FE >> entero >> caracter){
+    cout<<"Cada numero por separado:"<<endl;
+    while(ss>>entero){
         cout<<entero<<endl;
     }
-    FE.close();
 
     return 0;
 }
