@@ -7,14 +7,15 @@ using namespace std;
 
 int main(void){
     srand(time(NULL));
-    string linea,valor,enter;
+    string linea,enter;
     int m,n,mF,nF,i,j;
+    int M[50][50];
     char separador;
 
     cout<<"Dame m ";cin>>m;
     cout<<"Dame n ";cin>>n;
 
-    ofstream FS("matriz.txt");
+   ofstream FS("matriz.txt");
     FS<<m<<","<<n<<","<<endl;
     for(i=0;i<m;i++){
         for(j=0;j<n;j++){
@@ -30,17 +31,22 @@ int main(void){
     ssOrden >> mF >> separador
             >> nF >> separador;
 
-    cout<<endl<<"M "<<mF<<"x"<<nF<<endl;
     for(i=0;i<mF;i++){
         getline(FE,linea);
-        stringstream ssFila(linea);
-        while( !ssFila.eof() ) {
-            getline(ssFila, valor, separador);
-            cout << valor <<"\t";
+        stringstream ss(linea);
+        for(j=0;j<nF;j++){
+            ss>>M[i][j]>>separador;
+        }
+    }
+    FE.close();
+
+    cout<<endl<<"M "<<mF<<"x"<<nF<<endl;
+    for(i=0;i<mF;i++){
+        for(j=0;j<nF;j++){
+            cout<<M[i][j]<<"\t";
         }
         cout<<endl;
     }
-    FE.close();
 
     return 0;
 }
