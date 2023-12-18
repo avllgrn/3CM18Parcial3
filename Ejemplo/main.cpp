@@ -1,27 +1,46 @@
 #include <iostream>
 #include <stdlib.h>
+#include <time.h>
+#include <fstream>
 #include <sstream>
 using namespace std;
 
 int main(void){
-    string VariosEnterosEnCadena;
-    string UnEnteroEnCadena;
-    char separador=',';
+    srand(time(NULL));
+    string linea,valor,enter;
+    int m,n,mF,nF,i,j;
+    char separador;
 
-    cout<<"Ingresa varios enteros cada uno seguido por una coma ";
-    getline(cin,VariosEnterosEnCadena);//Se guardan todos los numeros como una sola cadena de caracteres numericos separados por coma
+    cout<<"Dame m ";cin>>m;
+    cout<<"Dame n ";cin>>n;
 
-    stringstream ss(VariosEnterosEnCadena); //Se conecta un canal (stringstream)
-                                            //hacia la cadena de caracteres numericos separados por coma
-
-    cout<<"Cada numero por separado:"<<endl;
-    while( !ss.eof() ){ //Mientras el canal no haya llegado al fin del flujo de caracteres numericos,
-
-        getline(ss, UnEnteroEnCadena, separador);   //se extrae del canal una cadena numerica
-                                                    //desde una posicion hasta encontrarse el separador(la coma).
-
-        cout<<UnEnteroEnCadena<<endl;//Se muestra cada cadena de caracteres numericos extraida
+    ofstream FS("matriz.txt");
+    FS<<m<<","<<n<<","<<endl;
+    for(i=0;i<m;i++){
+        for(j=0;j<n;j++){
+            FS << rand()%100 <<",";
+        }
+        FS<<endl;
     }
+    FS.close();
+
+    ifstream FE("matriz.txt");
+    getline(FE,linea);
+    stringstream ssOrden(linea);
+    ssOrden >> mF >> separador
+            >> nF >> separador;
+
+    cout<<endl<<"M "<<mF<<"x"<<nF<<endl;
+    for(i=0;i<mF;i++){
+        getline(FE,linea);
+        stringstream ssFila(linea);
+        while( !ssFila.eof() ) {
+            getline(ssFila, valor, separador);
+            cout << valor <<"\t";
+        }
+        cout<<endl;
+    }
+    FE.close();
 
     return 0;
 }
